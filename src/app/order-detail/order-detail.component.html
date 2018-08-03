@@ -1,0 +1,31 @@
+<div nz-row>
+  <div nz-col nzSpan="12">
+    <div nz-row>
+      <div nz-col><h2>{{orderInfo?.goodName}}</h2></div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col>Seckill Price : ${{orderInfo?.price}}</div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col>Seckill Stock : {{orderInfo?.num}}</div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col>Create Time : {{orderInfo?.createTime}}</div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col [ngSwitch]="orderInfo?.status">
+        <div *ngSwitchCase="'0'">
+          Status : Not paid
+          <button nz-button nzType="primary" (click)="pay(orderInfo?.id)">Pay</button>
+        </div>
+        <div *ngSwitchCase="'1'">
+          Status : Paid
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -15,6 +15,11 @@ import {NavComponent} from './nav/nav.component';
 import {HomeComponent} from './home/home.component';
 import {InfoShareService} from './service/info-share.service';
 import {InfoStorageService} from './service/info-storage.service';
+import {SessionComponent} from './session/session.component';
+import {GoodService} from './service/good.service';
+import {SeckillDetailComponent} from './seckill-detail/seckill-detail.component';
+import {OrderDetailComponent} from './order-detail/order-detail.component';
+import {SeckillService} from './service/seckill.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,10 @@ import {InfoStorageService} from './service/info-storage.service';
     LoginComponent,
     FooterComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    SessionComponent,
+    SeckillDetailComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +43,8 @@ import {InfoStorageService} from './service/info-storage.service';
   ],
   providers: [
     {provide: UserService, useClass: UserService},
+    {provide: GoodService, useClass: GoodService},
+    {provide: SeckillService, useClass: SeckillService},
     {provide: InfoShareService, useClass: InfoShareService},
     {provide: InfoStorageService, useClass: InfoStorageService},
     {provide: HTTP_INTERCEPTORS, useClass: ResponseProcessorService, multi: true}

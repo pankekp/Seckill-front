@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {User} from '../pojo/user';
 import {Result} from '../pojo/result';
@@ -17,6 +17,12 @@ export class UserService {
     const params = new HttpParams()
       .set('username', String(user.username))
       .set('password', String(user.password));
-    return this.http.get<Result<User>>(environment.url + 'login', {params: params});
+    return this.http.get<Result<User>>(environment.url + 'login', {params: params, withCredentials: true});
+  }
+
+  testSession(): Observable<Result<User>> {
+    const headers = new HttpHeaders()
+      .set('Cookie', document.cookie);
+    return this.http.get<Result<User>>(environment.url + 'session', {headers, withCredentials: true});
   }
 }

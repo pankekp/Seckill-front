@@ -1,3 +1,19 @@
-<p>
-  home works!
-</p>
+<div nz-row>
+  <div nz-col [nzSpan]="6" *ngFor="let good of goods">
+    <nz-card style="width:275px"
+             [nzCover]="cover"
+             [nzActions]="[detail]">
+      <nz-card-meta
+        [nzTitle]="good.name"
+        [nzDescription]="'$'+good.price"></nz-card-meta>
+    </nz-card>
+    <ng-template #cover>
+      <img [src]="good.cover"/>
+    </ng-template>
+    <ng-template #detail>
+      <i class="anticon anticon-info-circle-o" [routerLink]="['/detail',good.id]"></i>
+    </ng-template>
+    <br>
+    <br>
+  </div>
+</div>

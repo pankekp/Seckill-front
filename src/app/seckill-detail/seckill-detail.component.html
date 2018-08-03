@@ -1,0 +1,41 @@
+<div nz-row>
+  <div nz-col nzSpan="12">
+    <img [src]="goodSeckill?.cover" class="img"/>
+  </div>
+  <div nz-col nzSpan="12">
+    <div nz-row>
+      <div nz-col><h2>{{goodSeckill?.name}}</h2></div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col>Seckill Price : ${{goodSeckill?.seckillPrice}}</div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col>Seckill Stock : {{goodSeckill?.seckillStock}}</div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col [ngSwitch]="goodSeckill?.status">
+        <div *ngSwitchCase="'0'">
+          The seckill starts on {{goodSeckill?.start}}
+        </div>
+        <div *ngSwitchCase="'1'">
+          <br>
+          <button nz-button nzType="primary" (click)="seckill(goodSeckill?.id)">Seckill</button>
+        </div>
+        <div *ngSwitchCase="'2'">
+          The seckill ended on {{goodSeckill?.end}}
+        </div>
+      </div>
+    </div>
+    <br>
+    <div nz-row>
+      <div nz-col>
+        <p>Description :</p>
+        {{goodSeckill?.description}}
+      </div>
+    </div>
+  </div>
+</div>
+
