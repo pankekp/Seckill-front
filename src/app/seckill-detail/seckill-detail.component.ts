@@ -18,6 +18,8 @@ export class SeckillDetailComponent implements OnInit {
 
   private goodId: number;
   goodSeckill: GoodSeckillVo;
+  isSpinning: boolean;
+  status: string;
 
   constructor(private routeInfo: ActivatedRoute,
               private goodService: GoodService,
@@ -28,6 +30,8 @@ export class SeckillDetailComponent implements OnInit {
               private router: Router) {
     this.goodId = 0;
     this.goodSeckill = null;
+    this.isSpinning = false;
+    this.status = '';
   }
 
   ngOnInit() {
@@ -54,17 +58,39 @@ export class SeckillDetailComponent implements OnInit {
       );
   }
 
-  seckill(goodId: number) {
+  seckill(goodId: number): void {
     if (this.infoStorageService.getUser() == null) {
       this.messageService.info('Please login');
       return;
     }
-    this.seckillService.seckill(this.infoStorageService.getUser().id, goodId)
+    this.seckillService.seckill(goodId)
       .subscribe(
         (data) => {
-          this.infoStorageService.saveOrder(data.data);
-          this.messageService.create('success', data.message);
-          this.router.navigate(['/order']);
+          this.isSpinning = true;
+          this.status = data.message;
+          return this.getSeckillResult(goodId);
+        },
+        (error) => {
+          this.messageService.create('error', error);
+        }
+      );
+  }
+
+  getSeckillResult(goodId: number): void {
+    this.seckillService.getSeckillResult(goodId)
+      .subscribe(
+        (data) => {
+          if (data.data === 0) {
+            setTimeout(
+              () => {
+                this.getSeckillResult(goodId);
+              },
+              100);
+          } else {
+            this.infoStorageService.saveOrderId(data.data);
+            this.messageService.create('success', data.message);
+            this.router.navigate(['/order']);
+          }
         },
         (error) => {
           this.messageService.create('error', error);

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {InfoStorageService} from '../service/info-storage.service';
+import {OrderService} from '../service/order.service';
 import {OrderInfo} from '../pojo/order-info';
 
 @Component({
@@ -9,14 +10,22 @@ import {OrderInfo} from '../pojo/order-info';
 })
 export class OrderDetailComponent implements OnInit {
 
+  private orderInfoId: number;
   orderInfo: OrderInfo;
 
-  constructor(private infoStorageService: InfoStorageService) {
+  constructor(private infoStorageService: InfoStorageService,
+              private orderService: OrderService) {
   }
 
   ngOnInit() {
-    this.orderInfo = this.infoStorageService.getOrder();
-    this.orderInfo.createTime = this.parseTimestamp(this.orderInfo.createTime);
+    this.orderInfoId = this.infoStorageService.getOrderId();
+    this.orderService.getOrder(this.orderInfoId)
+      .subscribe(
+        (data) => {
+          this.orderInfo = data.data;
+          this.orderInfo.createTime = this.parseTimestamp(this.orderInfo.createTime);
+        }
+      );
   }
 
   parseTimestamp(timeStamp: string): string {
@@ -31,6 +40,5 @@ export class OrderDetailComponent implements OnInit {
   }
 
   pay(id: number) {
-
   }
 }

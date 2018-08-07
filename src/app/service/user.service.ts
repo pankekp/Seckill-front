@@ -17,12 +17,12 @@ export class UserService {
     const params = new HttpParams()
       .set('username', String(user.username))
       .set('password', String(user.password));
-    return this.http.get<Result<User>>(environment.url + 'login', {params: params, withCredentials: true});
+    return this.http.get<Result<User>>(environment.url + 'login', {params: params});
   }
 
   testSession(): Observable<Result<User>> {
     const headers = new HttpHeaders()
       .set('Cookie', document.cookie);
-    return this.http.get<Result<User>>(environment.url + 'session', {headers, withCredentials: true});
+    return this.http.get<Result<User>>(environment.url + 'session', {headers: headers});
   }
 }

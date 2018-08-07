@@ -20,6 +20,7 @@ import {GoodService} from './service/good.service';
 import {SeckillDetailComponent} from './seckill-detail/seckill-detail.component';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
 import {SeckillService} from './service/seckill.service';
+import {OrderService} from './service/order.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {SeckillService} from './service/seckill.service';
     {provide: UserService, useClass: UserService},
     {provide: GoodService, useClass: GoodService},
     {provide: SeckillService, useClass: SeckillService},
+    {provide: OrderService, useClass: OrderService},
     {provide: InfoShareService, useClass: InfoShareService},
     {provide: InfoStorageService, useClass: InfoStorageService},
     {provide: HTTP_INTERCEPTORS, useClass: ResponseProcessorService, multi: true}

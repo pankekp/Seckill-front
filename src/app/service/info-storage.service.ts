@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {User} from '../pojo/user';
-import {OrderInfo} from '../pojo/order-info';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +18,19 @@ export class InfoStorageService {
     localStorage.clear();
   }
 
-  public saveOrder(orderInfo: OrderInfo): void {
-    localStorage.setItem('order', JSON.stringify(orderInfo));
+  public saveOrderId(orderInfoId: number): void {
+    localStorage.setItem('orderId', JSON.stringify(orderInfoId));
   }
 
-  public getOrder(): OrderInfo {
-    return JSON.parse(localStorage.getItem('order'));
+  public getOrderId(): number {
+    return Number(localStorage.getItem('orderId'));
+  }
+
+  public setCookie(cookie: string): void {
+    localStorage.setItem('cookie', cookie);
+  }
+
+  public getCookie(): string {
+    return localStorage.getItem('cookie');
   }
 }

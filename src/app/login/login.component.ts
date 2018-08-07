@@ -4,6 +4,7 @@ import {InfoShareService} from '../service/info-share.service';
 import {UserService} from '../service/user.service';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
+import {InfoStorageService} from '../service/info-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
               private infoShareService: InfoShareService,
               private userService: UserService,
               private messageService: NzMessageService,
-              private router: Router) {
+              private router: Router,
+              private infoStorageService: InfoStorageService) {
     this.loginForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
             this.infoShareService.updateUserInfo(res.data);
             this.messageService.create('success', res.message);
             this.router.navigate(['/home']);
+            this.infoStorageService.setCookie(document.cookie);
           },
           (error) => {
             this.messageService.create('error', error);
