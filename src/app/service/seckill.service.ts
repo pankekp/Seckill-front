@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Result} from '../pojo/result';
 import {OrderInfo} from '../pojo/order-info';
 import {environment} from '../../environments/environment';
-import {InfoStorageService} from './info-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +32,6 @@ export class SeckillService {
   getSeckillResult(goodId: number): Observable<Result<number>> {
     const params = new HttpParams()
       .set('goodId', String(goodId));
-    return this.http.get<Result<number>>(environment.url + 'seckillrResult', {params: params});
+    return this.http.get<Result<number>>(environment.url + 'seckillResult', {params: params});
   }
 }

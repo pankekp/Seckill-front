@@ -15,7 +15,6 @@ import {NavComponent} from './nav/nav.component';
 import {HomeComponent} from './home/home.component';
 import {InfoShareService} from './service/info-share.service';
 import {InfoStorageService} from './service/info-storage.service';
-import {SessionComponent} from './session/session.component';
 import {GoodService} from './service/good.service';
 import {SeckillDetailComponent} from './seckill-detail/seckill-detail.component';
 import {OrderDetailComponent} from './order-detail/order-detail.component';
@@ -29,7 +28,6 @@ import {OrderService} from './service/order.service';
     FooterComponent,
     NavComponent,
     HomeComponent,
-    SessionComponent,
     SeckillDetailComponent,
     OrderDetailComponent
   ],
